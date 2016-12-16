@@ -9,6 +9,9 @@ build
 out
 lib
 
+.gradle/
+local.properties
+
 target
 pom.xml.*
 release.properties
