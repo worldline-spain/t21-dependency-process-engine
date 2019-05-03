@@ -7,8 +7,8 @@ import com.worldline.engine.dependency.invoker.Invoker;
  */
 public interface ProcessFinishedInterface <R> {
 
-    public static int SUCCESS = 200;
-    public static int ERROR = 400;
+    int SUCCESS = 200;
+    int ERROR = 400;
 
     /**
      * Callback method to be invoked when the process has finished executing.
