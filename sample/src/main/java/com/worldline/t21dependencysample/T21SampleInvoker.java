@@ -34,6 +34,10 @@ public class T21SampleInvoker extends Invoker<SampleReceiver> {
     private void initialize() {
         items.add(new Item(TimelineView.TYPE_START, "Start process"));
 
+        CheckBatteryLevelTask checkBatteryLevelTask = new CheckBatteryLevelTask();
+        takeCommand(checkBatteryLevelTask);
+        items.add(new Item(checkBatteryLevelTask.getId()));
+
         CheckInternetConnectionTask checkInternetConnectionTask = new CheckInternetConnectionTask();
         takeCommand(checkInternetConnectionTask);
         items.add(new Item(checkInternetConnectionTask.getId()));

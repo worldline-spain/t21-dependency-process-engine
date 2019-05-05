@@ -10,6 +10,8 @@ public class SampleReceiver {
 
     private String pointTitle;
 
+    private int batteryLevel;
+
     public SampleReceiver(Context context) {
         this.context = context;
     }
@@ -36,5 +38,13 @@ public class SampleReceiver {
 
     public void setPointTitle(String pointTitle) {
         this.pointTitle = pointTitle;
+    }
+
+    public int getBatteryLevel() {
+        return batteryLevel;
+    }
+
+    public void setBatteryLevel(int batteryLevel) {
+        this.batteryLevel = batteryLevel;
     }
 }
