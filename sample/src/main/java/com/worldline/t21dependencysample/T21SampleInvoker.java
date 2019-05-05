@@ -42,6 +42,10 @@ public class T21SampleInvoker extends Invoker<SampleReceiver> {
         takeCommand(checkInternetConnectionTask);
         items.add(new Item(checkInternetConnectionTask.getId()));
 
+        CheckTimeOfDayTask checkTimeOfDayTask = new CheckTimeOfDayTask();
+        takeCommand(checkTimeOfDayTask);
+        items.add(new Item(checkTimeOfDayTask.getId()));
+
         GetPointDetailsTask getPointDetailsTask = new GetPointDetailsTask();
         takeCommand(getPointDetailsTask);
         items.add(new Item(getPointDetailsTask.getId()));

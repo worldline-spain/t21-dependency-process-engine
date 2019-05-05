@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements ProcessFinishedIn
         recyclerView.setAdapter(adapter);
 
         receiver = new SampleReceiver(this);
-        receiver.setTaskId(13);
         sampleInvoker = new T21SampleInvoker(receiver, this, this);
         adapter.addItems(sampleInvoker.getItems());
     }
