@@ -22,11 +22,15 @@ public class TimelineItemViewHolder extends RecyclerView.ViewHolder {
 
     public void onBind(Item item) {
         timelineView.setTimelineType(item.getType());
-        textView.setText(item.getId() + " " + item.getDescription());
+        textView.setText(String.format("%s %s", item.getId(), item.getDescription()));
         if (item.isSuccess()) {
             timelineView.setIndicatorColor(Color.parseColor("green"));
         } else if (item.isError()) {
             timelineView.setIndicatorColor(Color.parseColor("red"));
+        } else if (item.isProcessFinishedSuccessfully()) {
+            //If the process finished successfully, and a task is neither success nor error,
+            //that means that the task was skipped because it's optional (not included in the required states).
+            timelineView.setIndicatorColor(Color.parseColor("yellow"));
         } else {
             timelineView.setIndicatorColor(Color.parseColor("white"));
         }

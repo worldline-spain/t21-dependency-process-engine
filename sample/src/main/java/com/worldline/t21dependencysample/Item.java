@@ -14,6 +14,8 @@ public class Item {
 
     private boolean error;
 
+    private boolean processFinishedSuccessfully;
+
     public Item(String id) {
         this.type = TimelineView.TYPE_DEFAULT;
         this.id = id;
@@ -72,5 +74,13 @@ public class Item {
 
     public void setError(boolean error) {
         this.error = error;
+    }
+
+    public boolean isProcessFinishedSuccessfully() {
+        return processFinishedSuccessfully;
+    }
+
+    public void setProcessFinishedSuccessfully(boolean processFinishedSuccessfully) {
+        this.processFinishedSuccessfully = processFinishedSuccessfully;
     }
 }

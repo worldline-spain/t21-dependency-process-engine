@@ -51,7 +51,10 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineItemViewHolder
             processRunning = false;
             items.get(getItemCount() - 1).setSuccess(true);
             items.get(getItemCount() - 1).setDescription(pointTitle);
-            notifyItemChanged(getItemCount() - 1);
+            for (Item item : items) {
+                item.setProcessFinishedSuccessfully(true);
+            }
+            notifyDataSetChanged();
         }
     }
 
