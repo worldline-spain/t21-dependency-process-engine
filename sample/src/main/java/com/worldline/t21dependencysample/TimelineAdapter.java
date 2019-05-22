@@ -67,6 +67,15 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineItemViewHolder
         }
     }
 
+    public void reset() {
+        for (Item item : items) {
+            item.setProcessFinishedSuccessfully(false);
+            item.setError(false);
+            item.setSuccess(false);
+        }
+        notifyDataSetChanged();
+    }
+
     public void start() {
         if (getItemCount() > 0) {
             processRunning = true;

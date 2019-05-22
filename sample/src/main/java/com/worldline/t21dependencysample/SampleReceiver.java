@@ -16,6 +16,12 @@ public class SampleReceiver {
         this.context = context;
     }
 
+    public void reset() {
+        taskId = 0;
+        pointTitle = null;
+        batteryLevel = 0;
+    }
+
     public Context getContext() {
         return context;
     }

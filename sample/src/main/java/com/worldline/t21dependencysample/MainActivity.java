@@ -1,7 +1,11 @@
 package com.worldline.t21dependencysample;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,13 +18,13 @@ public class MainActivity extends AppCompatActivity implements ProcessFinishedIn
 
     private static final String TAG = "T21";
 
+    public static final int PROCESS_RESTART_DELAY = 3000;
+
     private T21SampleInvoker sampleInvoker;
 
     private RecyclerView recyclerView;
 
     private TimelineAdapter adapter;
-
-    private SampleReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +34,45 @@ public class MainActivity extends AppCompatActivity implements ProcessFinishedIn
         startProcess();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.refresh_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_refresh && adapter != null && !adapter.isProcessRunning()) {
+            adapter.reset();
+            sampleInvoker.getReceiver().reset();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    startProcess();
+                }
+            }, PROCESS_RESTART_DELAY);
+
+            Toast.makeText(this, getString(R.string.process_restart), Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initViews() {
         recyclerView = findViewById(R.id.recycler);
         adapter = new TimelineAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        receiver = new SampleReceiver(this);
+        SampleReceiver receiver = new SampleReceiver(this);
         sampleInvoker = new T21SampleInvoker(receiver, this, this);
         adapter.addItems(sampleInvoker.getItems());
     }
 
     private void startProcess() {
-        sampleInvoker.startProcess();
         adapter.start();
+        sampleInvoker.startProcess();
     }
 
     @Override
