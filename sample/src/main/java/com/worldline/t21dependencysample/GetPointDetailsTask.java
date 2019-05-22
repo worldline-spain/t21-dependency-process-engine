@@ -10,6 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GetPointDetailsTask extends BaseCommand<SampleReceiver, Point> {
 
+    private static final int DEFAULT_TASK_ID = 13;
+
     private static final String ENDPOINT = "http://t21services.herokuapp.com";
 
     private final PointApiService pointApiService;
@@ -27,7 +29,8 @@ public class GetPointDetailsTask extends BaseCommand<SampleReceiver, Point> {
     @Override
     public void execute() {
         super.execute();
-        String pointId = Integer.toString(receiver.getTaskId());
+        int taskId = receiver.getTaskId() != 0 ? receiver.getTaskId() : DEFAULT_TASK_ID;
+        String pointId = Integer.toString(taskId);
         Call<Point> call = pointApiService.getPointById(pointId);
         call.enqueue(new Callback<Point>() {
             @Override

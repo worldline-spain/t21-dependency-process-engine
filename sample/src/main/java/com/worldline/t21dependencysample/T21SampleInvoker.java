@@ -24,8 +24,11 @@ public class T21SampleInvoker extends Invoker<SampleReceiver> {
 
     public T21SampleInvoker(SampleReceiver receiver, ProcessFinishedInterface<SampleReceiver> listener, AdapterListener adapterListener) {
         super(Constants.SAMPLE_INVOKER, receiver, listener,
+                Constants.BATTERY_LEVEL_CHECKED,
                 Constants.INTERNET_CONNECTION_CHECKED,
                 Constants.POINT_LOADED);
+        //Constants.TIME_OF_DAY_CHECKED is not included in the required states,
+        //therefore making it an optional task.
         items = new ArrayList<>();
         this.adapterListener = adapterListener;
         initialize();
@@ -42,7 +45,9 @@ public class T21SampleInvoker extends Invoker<SampleReceiver> {
         takeCommand(checkInternetConnectionTask);
         items.add(new Item(checkInternetConnectionTask.getId()));
 
-        CheckTimeOfDayTask checkTimeOfDayTask = new CheckTimeOfDayTask();
+        //Add a task specific requirement:
+        //If the battery level is below 15%, don't check the time of day and fallback to a default task id
+        CheckTimeOfDayTask checkTimeOfDayTask = new CheckTimeOfDayTask(Constants.BATTERY_LEVEL_ABOVE_15);
         takeCommand(checkTimeOfDayTask);
         items.add(new Item(checkTimeOfDayTask.getId()));
 

@@ -21,7 +21,7 @@ public class CheckBatteryLevelTask extends BaseCommand<SampleReceiver, Integer> 
         int batteryLevel = getBatteryPercentage(receiver.getContext());
         receiver.setBatteryLevel(batteryLevel);
 
-        if (batteryLevel > 15) {
+        if (batteryLevel > 5) {
             handleSuccess(batteryLevel);
         } else {
             handleError();
@@ -31,6 +31,9 @@ public class CheckBatteryLevelTask extends BaseCommand<SampleReceiver, Integer> 
     @Override
     protected void handleSuccess(Integer response) {
         updatedStates.add(Constants.BATTERY_LEVEL_CHECKED);
+        if (response > 15) {
+            updatedStates.add(Constants.BATTERY_LEVEL_ABOVE_15);
+        }
         listener.commandFinished(this);
     }
 

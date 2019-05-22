@@ -19,4 +19,6 @@ public interface Constants {
     String TIME_OF_DAY_CHECKED = "state Time of Day Checked ";
 
     String POINT_LOADED = "state Point loaded";
+
+    String BATTERY_LEVEL_ABOVE_15 = "state Battery Level Above 15%";
 }
