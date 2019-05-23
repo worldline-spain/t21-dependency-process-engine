@@ -1,10 +1,15 @@
 package com.worldline.t21dependencysample;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -68,6 +73,26 @@ public class MainActivity extends AppCompatActivity implements ProcessFinishedIn
         SampleReceiver receiver = new SampleReceiver(this);
         sampleInvoker = new T21SampleInvoker(receiver, this, this);
         adapter.addItems(sampleInvoker.getItems());
+
+        TextView keySuccess = findViewById(R.id.key_success);
+        setTextViewDrawableColor(keySuccess, Color.parseColor("green"));
+
+        TextView keyError = findViewById(R.id.key_error);
+        setTextViewDrawableColor(keyError, Color.parseColor("red"));
+
+        TextView keySkipped = findViewById(R.id.key_skipped);
+        setTextViewDrawableColor(keySkipped, Color.parseColor("yellow"));
+
+        TextView keyNotExecuted = findViewById(R.id.key_not_executed);
+        setTextViewDrawableColor(keyNotExecuted, Color.parseColor("grey"));
+    }
+
+    private void setTextViewDrawableColor(TextView textView, int color) {
+        for (Drawable drawable : textView.getCompoundDrawables()) {
+            if (drawable != null) {
+                drawable.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
+            }
+        }
     }
 
     private void startProcess() {

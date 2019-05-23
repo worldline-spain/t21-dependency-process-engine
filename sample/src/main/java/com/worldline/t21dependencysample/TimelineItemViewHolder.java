@@ -32,7 +32,7 @@ public class TimelineItemViewHolder extends RecyclerView.ViewHolder {
             //that means that the task was skipped because it's optional (not included in the required states).
             timelineView.setIndicatorColor(Color.parseColor("yellow"));
         } else {
-            timelineView.setIndicatorColor(Color.parseColor("white"));
+            timelineView.setIndicatorColor(Color.parseColor("grey"));
         }
     }
 }
