@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">T21DependencySample</string>
+
+    <string name="menu_refresh">Refresh</string>
+
+    <string name="process_restart">Restarting the process</string>
+</resources>
