@@ -8,7 +8,7 @@ T21 Dependency Process Engine is a [command design pattern](https://en.wikipedia
 
 - Add these dependencies to your project:
 ```bash
-compile 'com.github.worldline-spain:t21-dependency-process-engine:1.0.0'
+implementation 'com.github.worldline-spain:t21-dependency-process-engine:1.0.1'
 ```
 - Add this to your root build.gradle
 ```bash
